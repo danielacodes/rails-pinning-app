@@ -23,6 +23,9 @@ gem 'jbuilder', '~> 2.8'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# Twelve-factor is a set of standards and best practices for modern web apps
+gem 'rails_12factor'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
