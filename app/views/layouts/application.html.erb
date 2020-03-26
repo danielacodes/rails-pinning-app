@@ -6,7 +6,12 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-</head>
+  <%= favicon_link_tag asset_path('android-chrome-192x192.png') %>
+  <%= favicon_link_tag asset_path('android-chrome-512x512.png') %>
+  <%= favicon_link_tag asset_path('apple-touch-icon.png') %>
+  <%= favicon_link_tag asset_path('favicon-16x16.png') %>
+  <%= favicon_link_tag asset_path('favicon-32x32.png') %>
+  </head>
 <body>
   <div class="container">
     <%= yield %>
