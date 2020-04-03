@@ -1,0 +1,59 @@
+<div class="header">
+  <h1>Here you will be able to create new pins soon</h1>
+</div>
+
+
+
+  <%= form_for(@pin, :html => {:class => "form"}) do |f| %>
+
+  <div class="form-row row">
+    <div class="form-col col-md-6 col-sm-12 form-group">
+      <label for="pin_title" class="form-label col-xs-2 control-label">Title</label>     
+      <div class="col-xs-10">
+        <%= f.text_field :title, class: "form-field form-control" %>
+      </div>
+    </div>
+
+    <div class="form-col col-md-6 col-sm-12 form-group">
+      <label for="url" class="form-label col-xs-2 control-label">Url</label>
+      <div class="col-xs-10">
+        <%= f.text_field :url, class: "form-field form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row row">
+    <div class="form-col col-xs-12 form-group">
+      <label for="text" class="form-label col-xs-2 col-md-1 control-label">Text</label>
+      <div class="col-xs-10 col-md-11">
+        <%= f.text_area :text, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row row">
+    <div class="form-col col-md-6 col-sm-12 form-group">
+      <label for="slug" class="form-label col-xs-2 control-label">Slug</label>
+      <div class="col-xs-10">
+        <%= f.text_field :slug, class: "form-field form-control" %>
+      </div>
+    </div>
+
+    <div id="category-col" class="form-col col-md-6 col-sm-12 form-group">
+      <label for="pin_category_id" class="form-label col-xs-2 control-label">Category</label>
+      <div class="col-xs-10">
+        <%= f.collection_select :category_id, Category.all, :id, :name %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row row">
+    <div class="form-col col-xs-12 form-group">
+      <div class="button-col col-md-6 col-sm-12">
+        <%= f.submit(html_options = { class: "button"}) %>
+      </div>
+    </div>
+  </div>
+
+  <% end %>
+

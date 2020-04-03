@@ -1,13 +1,19 @@
 body {
-  background: url(asset-path("laptop-background.jpg")) no-repeat;
+  background: url(asset-path("laptop-background.jpg")) center no-repeat;
+  font-size: 16px;
 }
 
 a {
   color: #dd5566;
 }
+.header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 h1 {
   font-family: "Lobster", cursive;
-  font-size: 60px;
+  font-size: 3.75em;
   color: #dd5566;
 }
 .pin-container {
@@ -26,3 +32,49 @@ h1 {
 hr {
   clear: both;
 }
+
+/* FORM STYLES */
+
+.form {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.form-col {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.form-label {
+  margin-bottom: 0;
+  font-size: 1.5em;
+  padding: 0;
+}
+
+.form-field {
+  height: 4em;
+}
+
+.button-col {
+  padding: 0;
+}
+
+.button {
+  background-color: #dd5566;
+  border: #dd5566;
+  font-size: 1.5em;
+  color: white;
+  padding: 10px 50px 10px 50px;
+  margin-top: 20px;
+}
+
+#pin_category_id {
+  background-color: white;
+  height: 3.8em;
+  width: 100%;
+}
+
+/* ----- end of FORM STYLES ----- */
