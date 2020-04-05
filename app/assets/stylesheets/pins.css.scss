@@ -69,6 +69,7 @@ hr {
   color: white;
   padding: 10px 50px 10px 50px;
   margin-top: 20px;
+  font-weight: bold;
 }
 
 #pin_category_id {
@@ -78,3 +79,17 @@ hr {
 }
 
 /* ----- end of FORM STYLES ----- */
+
+/* ERROR STYLES */
+
+.error {
+  padding: 20px 20px 15px 20px;
+  border: 1px solid red;
+  background-color: #ffb3b3;
+}
+
+.error-label {
+  font-size: 1.25em;
+}
+
+/* ----- end of ERROR STYLES ----- */

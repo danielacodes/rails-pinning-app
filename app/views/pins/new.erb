@@ -1,8 +1,17 @@
+<% if !@errors.nil? %>
+  <div class="error">
+    <label class="error-label"><%= pluralize(@errors.count, 'error') %> prohibited this pin from being saved:</label>
+    <ul>
+      <% @errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="header">
   <h1>Here you will be able to create new pins soon</h1>
 </div>
-
-
 
   <%= form_for(@pin, :html => {:class => "form"}) do |f| %>
 

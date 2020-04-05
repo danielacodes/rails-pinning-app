@@ -17,4 +17,23 @@ class PinsController < ApplicationController
     @pin = Pin.new
   end
 
+  def create
+    @pin = Pin.new(pin_params)
+
+    if @pin.valid?
+      @pin.save
+      render :show
+    else       
+      @errors = @pin.errors
+      render :new
+    end
+
+  end
+
+  private
+
+  def pin_params
+    params.require(:pin).permit(:title, :url, :slug, :text, :category_id)
+  end
+
 end
