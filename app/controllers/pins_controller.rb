@@ -20,9 +20,8 @@ class PinsController < ApplicationController
   def create
     @pin = Pin.new(pin_params)
 
-    if @pin.valid?
-      @pin.save
-      render :show
+    if @pin.save      
+      redirect_to @pin
     else       
       @errors = @pin.errors
       render :new
