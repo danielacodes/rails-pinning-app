@@ -41,8 +41,14 @@
     </div>
   </div>
 
-  <label for="image" >Pin image</label>
-  <%= f.file_field :image %>
+  <div class="form-row row">
+    <div class="form-col col-xs-12 form-group">
+      <label for="image" class="form-label col-xs-2 col-md-1 control-label">Image</label>
+      <div class="col-xs-10 col-md-11">
+        <%= f.file_field :image %>
+      </div>
+    </div>
+  </div>
 
   <div class="form-row row">
     <div class="form-col col-xs-12 form-group">
