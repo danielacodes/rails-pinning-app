@@ -43,8 +43,7 @@ RSpec.describe PinsController do
             slug: "rails-wizard",
             text: "A fun and helpful Rails Resource",
             category_id: category.id
-        }
-        
+        }     
       end
   
       after(:each) do
@@ -88,5 +87,43 @@ RSpec.describe PinsController do
       end
   
     end
+
+    describe "GET edit" do
+      let (:category){
+          Category.find_or_create_by(name: 'test category')
+        }
+      before(:each) do
+        @pin = {
+            id: 10,
+            title: "Rails Wizard",
+            url: "http://railswizard.org",
+            slug: "rails-wizard",
+            text: "A fun and helpful Rails Resource",
+            category_id: category.id
+        }     
+      end
+  
+      after(:each) do
+        pin = Pin.find_by_slug("rails-wizard")
+        if !pin.nil?
+          pin.destroy
+        end
+      end
+
+      it 'responds with success' do
+        get edit_pin_path(@pin)
+        expect(response.success?).to be(true)
+      end
+
+      #renders the edit template
+
+      #assigns an instance variable called @pin to the Pin with the appropriate id
+    end
     
+    describe "PUT update" do
+      
+
+
+    end
+
 end

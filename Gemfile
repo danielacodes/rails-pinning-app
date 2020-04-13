@@ -47,8 +47,8 @@ group :development, :test do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  gem 'rspec'
-  gem 'rspec-rails', '3.6.0'
+  gem 'rspec', '~> 3'
+  gem 'rspec-rails', '~> 3'
   gem 'rails-controller-testing'
 
   gem 'wdm', '>= 0.1.0' if Gem.win_platform?
