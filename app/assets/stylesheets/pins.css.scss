@@ -1,5 +1,6 @@
 body {
-  background: url(asset-path("laptop-background.jpg")) center no-repeat;
+  background: url(asset-path("laptop-background.jpg")) no-repeat;
+  background-position: top center;
   font-size: 16px;
 }
 
