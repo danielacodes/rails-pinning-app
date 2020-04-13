@@ -11,7 +11,9 @@
           <div class="pin">
           <div class="pin-header row">
             <div class="logo-thumbnail col-xs-3">
-              <% if pin.category_id == 2 %>
+              <% if pin.image.attached? %>
+                <%= image_tag(pin.image, size: '60') %>
+              <% elsif pin.category_id == 2 %>
                 <%= image_tag('rails-logo-thumbnail.png') %>
               <% elsif pin.category_id == 1 %>
                 <%= image_tag('ruby-logo-thumbnail.png') %>
