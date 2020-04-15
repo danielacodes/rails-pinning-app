@@ -1,4 +1,5 @@
-<%= form_with(model: user, local: true) do |form| %>
+<%= form_for(@user, :html => {:class => "form"}) do |f| %>
+
   <% if user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,27 +12,44 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
+  <div class="form-row row">
+    <div class="form-col col-md-6 col-sm-12 form-group">
+      <label for="user_first_name" class="form-label col-xs-2 control-label">First name</label>
+      <div class="col-xs-10">
+        <%= f.text_field :first_name, class: "form-field form-control" %>
+      </div>
+    </div>
+
+    <div class="form-col col-md-6 col-sm-12 form-group">
+      <label for="user_last_name" class="form-label col-xs-2 control-label">Last name</label>
+      <div class="col-xs-10">
+        <%= f.text_field :last_name, class: "form-field form-control" %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
+  <div class="form-row row">
+    <div class="form-col col-md-6 col-sm-12 form-group">
+      <label for="user_email" class="form-label col-xs-2 control-label">Email</label>
+      <div class="col-xs-10">
+        <%= f.text_field :email, class: "form-field form-control" %>
+      </div>
+    </div>
+
+    <div class="form-col col-md-6 col-sm-12 form-group">
+      <label for="user_password" class="form-label col-xs-2 control-label">Password</label>
+      <div class="col-xs-10">
+        <%= f.text_field :password, class: "form-field form-control" %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
+  <div class="form-row row">
+    <div class="form-col col-xs-12 form-group">
+      <div class="button-col col-md-6 col-sm-12">
+        <%= f.submit(html_options = { class: "button"}) %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.text_field :password %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
