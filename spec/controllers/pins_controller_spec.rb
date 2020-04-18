@@ -1,5 +1,31 @@
 require 'spec_helper'
-RSpec.describe PinsController do
+RSpec.describe PinsController, type: :controller do
+
+  let(:category) {
+    Category.find_or_create_by(name: 'test category')
+  }
+
+  let(:valid_attributes) {
+    @pin = {
+      title: "Rails Wizard",
+      url: "http://railswizard.org",
+      slug: "rails-wizard",
+      text: "A fun and helpful Rails Resource",
+      category_id: category.id,
+    } 
+  }
+
+  let(:invalid_attributes) {
+    @pin = {
+      title: "",
+      url: "",
+      slug: "",
+      text: "",
+      category_id: category.id
+    } 
+  }
+
+  let(:valid_session) { {} }
 
     describe "GET index" do
 
@@ -89,30 +115,11 @@ RSpec.describe PinsController do
     end
 
     describe "GET edit" do
-      let (:category){
-          Category.find_or_create_by(name: 'test category')
-        }
-      before(:each) do
-        @pin = {
-            id: 10,
-            title: "Rails Wizard",
-            url: "http://railswizard.org",
-            slug: "rails-wizard",
-            text: "A fun and helpful Rails Resource",
-            category_id: category.id
-        }     
-      end
-  
-      after(:each) do
-        pin = Pin.find_by_slug("rails-wizard")
-        if !pin.nil?
-          pin.destroy
-        end
-      end
 
       it 'responds with success' do
-        get edit_pin_path(@pin)
-        expect(response.success?).to be(true)
+        pin = Pin.create! valid_attributes
+        get :edit, params: {id: pin.to_param}, session: valid_session
+        expect(response).to be_success
       end
 
       #renders the edit template
