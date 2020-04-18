@@ -32,7 +32,7 @@ class UsersController < ApplicationController
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        @errors = @user.errors
       end
     end
   end
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        @errors = @user.errors
       end
     end
   end
@@ -62,6 +62,18 @@ class UsersController < ApplicationController
   end
 
   def login
+    # @user = User.new
+  end
+
+  def authenticate
+    @user = User.authenticate(params[:email], params[:password])
+
+    if !@user.nil?
+      redirect_to user_path(@user)
+    else
+      @errors = "Hey, some error occured"
+      render :login
+    end
   end
 
   private

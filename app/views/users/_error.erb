@@ -1,0 +1,10 @@
+<% if @errors %>
+  <div class="error">
+    <label class="error-label"><%= pluralize(@errors.count, 'error') %> occured:</label>
+    <ul>
+      <% @errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
