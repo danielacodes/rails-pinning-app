@@ -61,21 +61,21 @@ class UsersController < ApplicationController
     end
   end
 
+  # LOGIN
   def login
-    # @user = User.new
   end
 
   def authenticate
-    @user = User.authenticate(params[:email], params[:password])
-
-    if !@user.nil?
-      redirect_to user_path(@user)
-    else
-      @errors = "Hey, some error occured"
-      render :login
-    end
+    @user = User.authenticate(params[:email].downcase, params[:password])
+      if @user.present?
+          redirect_to @user
+        else nil
+          @errors = "Invalid email or password"
+          render :login
+      end
   end
 
+  # PRIVATE
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
