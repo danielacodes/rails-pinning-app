@@ -5,9 +5,16 @@ RSpec.describe "users/show", type: :view do
     @user = assign(:user, User.create!(
       :first_name => "First Name",
       :last_name => "Last Name",
-      :email => "Email",
+      :email => "Email3",
       :password => "Password"
     ))
+  end
+
+  after(:each) do
+    user = User.find_by_email("Email3")
+    if !user.nil?
+      user.destroy
+    end
   end
 
   it "renders attributes in <p>" do

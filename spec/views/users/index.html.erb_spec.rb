@@ -18,6 +18,13 @@ RSpec.describe "users/index", type: :view do
     ])
   end
 
+  after(:each) do
+    users = User.all
+    if !users.nil?
+      users.destroy
+    end
+  end
+
   it "renders a list of users" do
     render
     assert_select "tr>td", :text => "First Name".to_s, :count => 2
