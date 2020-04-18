@@ -138,4 +138,39 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe "GET login" do
+    it "renders the login view" do
+      get :login
+      expect(response).to render_template('login')
+    end
+  end
+
+  describe "POST login" do
+   
+    it "renders the show view if params valid" do
+      user = User.create! valid_attributes
+      post :authenticate, params: {id: user.to_param}, session: valid_session
+      expect(response).to render_template(:show)
+    end
+
+    it "populates @user if params valid" do 
+      user = User.create! valid_attributes
+      post :authenticate, params: {id: user.to_param}, session: valid_session
+      expect(assigns[:user]).to eq(user)
+    end
+
+    it "renders the login view if params invalid" do
+      user = User.create! invalid_attributes
+      post :authenticate, params: {id: user.to_param}, session: valid_session
+      expect(response).to render_template('login')    
+    end
+
+    it "populates the @errors variable if params invalid" do
+      user = User.create! invalid_attributes
+      post :authenticate, params: {id: user.to_param}, session: valid_session 
+      expect(assigns[:errors]).to eq(!nil)
+    end
+
+  end
+
 end
