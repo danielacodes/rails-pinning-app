@@ -35,7 +35,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Use Puma as the web server
 gem 'puma'
 
-group :development, :test do
+group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -46,16 +46,17 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-
-  gem 'rspec', '~> 3'
-  gem 'rspec-rails', '~> 3'
-  gem 'rails-controller-testing'
-
   gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 end
 
 group :test do
+  gem 'shoulda-matchers'
+  gem 'spring'
   gem 'database_cleaner'
+  gem 'rspec', '~> 3'
+  gem 'rspec-rails', '~> 3'
+  gem 'rails-controller-testing'
+  gem 'web-console', '~> 3.7'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
