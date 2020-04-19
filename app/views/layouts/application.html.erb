@@ -19,7 +19,7 @@
     <% if session[:user_id] %>
     <div class="user-greeting pull-right">
       <h3>
-        Hi, <%= current_user.first_name %>!
+        Hi, <%= current_user.first_name %>! | <%= link_to 'Logout', logout_path(current_user), method: :delete %>
       </h3>
     </div>
     <% end  %>

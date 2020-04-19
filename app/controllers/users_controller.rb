@@ -76,6 +76,12 @@ class UsersController < ApplicationController
       end
   end
 
+  # LOGOUT
+  def logout
+    session.delete(:user_id)
+    redirect_to login_path
+  end
+
   # PRIVATE
   private
     # Use callbacks to share common setup or constraints between actions.
