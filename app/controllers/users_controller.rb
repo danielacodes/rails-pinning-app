@@ -68,7 +68,8 @@ class UsersController < ApplicationController
   def authenticate
     @user = User.authenticate(params[:email], params[:password])
       if @user.present?
-          redirect_to @user
+          session[:user_id] = @user.id 
+          redirect_to user_path(@user)
         else nil
           @errors = "Invalid email or password"
           render :login
