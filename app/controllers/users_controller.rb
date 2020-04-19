@@ -66,7 +66,7 @@ class UsersController < ApplicationController
   end
 
   def authenticate
-    @user = User.authenticate(params[:email].downcase, params[:password])
+    @user = User.authenticate(params[:email], params[:password])
       if @user.present?
           redirect_to @user
         else nil

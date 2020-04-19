@@ -57,6 +57,7 @@ group :test do
   gem 'rspec-rails', '~> 3'
   gem 'rails-controller-testing'
   gem 'web-console', '~> 3.7'
+  gem 'factory_girl_rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
