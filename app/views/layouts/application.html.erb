@@ -19,7 +19,7 @@
     <% if session[:user_id] %>
     <div class="user-greeting pull-right">
       <h3>
-        Hi, <%= User.find(session[:user_id]).first_name %>!
+        Hi, <%= current_user.first_name %>!
       </h3>
     </div>
     <% end  %>
