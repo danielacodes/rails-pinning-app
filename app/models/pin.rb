@@ -2,6 +2,7 @@ class Pin < ActiveRecord::Base
   validates_presence_of :title, :url, :slug, :text, :category_id
   validates_uniqueness_of :slug
   belongs_to :category
+  belongs_to :user, optional: true
   has_one_attached :image
   validate :correct_image_type
 
