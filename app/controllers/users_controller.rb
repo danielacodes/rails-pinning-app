@@ -94,10 +94,4 @@ class UsersController < ApplicationController
       params.require(:user).permit(:first_name, :last_name, :email, :password)
     end
 
-    # Redirects the user to the login page if the current_user is nil
-    def require_login
-      if current_user.nil?
-        redirect_to login_path
-      end
-    end
 end
