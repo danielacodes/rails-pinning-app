@@ -1,5 +1,7 @@
 <%= form_for(@pin, :html => {:class => "form"}) do |f| %>
 
+  <%= f.hidden_field "user_id", value: current_user.id %>
+
   <div class="form-row row">
     <div class="form-col col-md-6 col-sm-12 form-group">
       <label for="pin_title" class="form-label col-xs-2 control-label">Title</label>     
