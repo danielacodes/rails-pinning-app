@@ -1,27 +1,29 @@
 require 'spec_helper'
 RSpec.describe PinsController, type: :controller do
 
-  let(:category) {
-    Category.find_or_create_by(name: 'test category')
-  }
+  before(:each) do 
+    @pin = FactoryGirl.build(:pin)
+  end
+
+  after(:each) do
+    @pin.destroy
+  end
 
   let(:valid_attributes) {
-    @pin = {
-      title: "Rails Wizard",
-      url: "http://railswizard.org",
-      slug: "rails-wizard",
-      text: "A fun and helpful Rails Resource",
-      category_id: category.id,
+    {
+      title: @pin.title,
+      url: @pin.url,
+      slug: @pin.slug,
+      text: @pin.text,
+      category_id: @pin.category_id,
     } 
   }
 
   let(:invalid_attributes) {
-    @pin = {
-      title: "",
-      url: "",
-      slug: "",
-      text: "",
-      category_id: category.id
+    {
+      title: @pin.title,
+      slug: @pin.slug,
+      category_id: @pin.category_id,
     } 
   }
 
@@ -59,34 +61,16 @@ RSpec.describe PinsController, type: :controller do
     end
 
     describe "POST create" do
-      let (:category){
-          Category.find_or_create_by(name: 'test category')
-        }
-      before(:each) do
-        @pin_hash = {
-            title: "Rails Wizard",
-            url: "http://railswizard.org",
-            slug: "rails-wizard",
-            text: "A fun and helpful Rails Resource",
-            category_id: category.id
-        }     
-      end
-  
-      after(:each) do
-        pin = Pin.find_by_slug("rails-wizard")
-        if !pin.nil?
-          pin.destroy
-        end
-      end
   
       it 'responds with a redirect' do
-        post :create, params: { pin: @pin_hash }
+        post :create, params: {pin: valid_attributes}, session: valid_session
         expect(response.redirect?).to be(true)
       end
   
       it 'creates a pin' do
-        post :create, params: { pin: @pin_hash }
-        expect(Pin.find_by_slug("rails-wizard").present?).to be(true)
+        expect {
+          post :create, params: {pin: valid_attributes}, session: valid_session
+        }.to change(Pin, :count).by(1)
       end
   
       it 'redirects to the show view' do
@@ -98,8 +82,7 @@ RSpec.describe PinsController, type: :controller do
         # The title is required in the Pin model, so we'll
         # delete the title from the @pin_hash in order
         # to test what happens with invalid parameters
-        @pin_hash.delete(:title)
-        post :create, params: { pin: @pin_hash }
+        post :create, params: {pin: invalid_attributes}, session: valid_session
         expect(response).to render_template(:new)
       end
   
@@ -107,8 +90,7 @@ RSpec.describe PinsController, type: :controller do
         # The title is required in the Pin model, so we'll
         # delete the title from the @pin_hash in order
         # to test what happens with invalid parameters
-        @pin_hash.delete(:title)
-        post :create, params: { pin: @pin_hash }
+        post :create, params: {user: invalid_attributes}, session: valid_session
         expect(assigns[:errors].present?).to be(true)
       end
   
