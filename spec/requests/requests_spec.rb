@@ -4,10 +4,15 @@ RSpec.describe "Our Application Routes" do
 
   before(:each) do 
     @pin = FactoryGirl.build(:pin)
+    @user = FactoryGirl.create(:user)
+    login(@user)
   end
 
   after(:each) do
     @pin.destroy
+    if !@user.destroyed?
+      @user.destroy
+    end
   end
 
   let(:valid_attributes) {
@@ -17,6 +22,7 @@ RSpec.describe "Our Application Routes" do
       slug: @pin.slug,
       text: @pin.text,
       category_id: @pin.category_id,
+      user_id: @pin.user_id
     } 
   }
 

@@ -3,10 +3,15 @@ RSpec.describe PinsController, type: :controller do
 
   before(:each) do 
     @pin = FactoryGirl.build(:pin)
+    @user = FactoryGirl.create(:user)
+    login(@user)
   end
 
   after(:each) do
     @pin.destroy
+    if !@user.destroyed?
+      @user.destroy
+    end
   end
 
   let(:valid_attributes) {
@@ -15,7 +20,8 @@ RSpec.describe PinsController, type: :controller do
       url: @pin.url,
       slug: @pin.slug,
       text: @pin.text,
-      category_id: @pin.category_id,
+      category: @pin.category,
+      image: @pin.image
     } 
   }
 
@@ -38,7 +44,7 @@ RSpec.describe PinsController, type: :controller do
 
       it 'populates @pins with all pins' do
         get :index
-        expect(assigns[:pins]).to eq(Pin.all)
+        expect(assigns[:pins]).to eq(Pin.where(:user_id => @user.id))
       end
 
     end
@@ -63,8 +69,8 @@ RSpec.describe PinsController, type: :controller do
     describe "POST create" do
   
       it 'responds with a redirect' do
-        post :create, params: {pin: valid_attributes}, session: valid_session
-        expect(response.redirect?).to be(true)
+        post :create, params: {pin: valid_attributes}
+        expect(response).to redirect_to(Pin.last)
       end
   
       it 'creates a pin' do
