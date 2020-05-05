@@ -5,6 +5,8 @@ class Pin < ActiveRecord::Base
   belongs_to :user, optional: true
   has_one_attached :image
   validate :correct_image_type
+  has_many :pinnings
+  has_many :users, through: :pinnings
 
   private 
   def correct_image_type

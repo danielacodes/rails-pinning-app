@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_184159) do
+ActiveRecord::Schema.define(version: 2020_05_05_182325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2020_05_03_184159) do
     t.string "name"
   end
 
+  create_table "pinnings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "pin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pin_id"], name: "index_pinnings_on_pin_id"
+    t.index ["user_id"], name: "index_pinnings_on_user_id"
+  end
+
   create_table "pins", id: :serial, force: :cascade do |t|
     t.string "title"
     t.string "url"
@@ -61,5 +70,7 @@ ActiveRecord::Schema.define(version: 2020_05_03_184159) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "pinnings", "pins"
+  add_foreign_key "pinnings", "users"
   add_foreign_key "pins", "users"
 end
