@@ -4,9 +4,6 @@
 </div>
 <hr/>
 
-<% if @pins.blank? %>
-  <h4>You don't have any pins yet.</h4>
-<% else %>
   <div class="pins">
     <% @pins.each_slice(3) do |row| %>
       <div class="row">
@@ -31,14 +28,21 @@
             </div>
             </div>
             <hr/>
-            <p class="text"><%= "#{pin.text}" %></p>
+            <div class="text">
+            <p ><%= "#{pin.text}" %></p>
+            </div>
+            <div>
+              <%= link_to repin_path(pin), class: "repin-button", method: "post" do %>
+                <i class="fas fa-thumbtack"></i>
+                Repin!
+              <% end %>  
+            </div>
           </div>
         </div>
       <% end %>
     </div>
   <% end %>
 </div>
-<% end %>
 
 
 <hr/>

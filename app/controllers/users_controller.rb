@@ -10,6 +10,21 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+  # pins repinned by user
+    pinnings = current_user.pinnings.all
+    ids = []
+    pinnings.each do |pinning|
+      id = pinning.pin_id
+      ids << id
+    end
+  # pins created by user
+    pins_created_by_user = Pin.where(:user_id => current_user.id)
+    pins_created_by_user.each do |pin|
+      own_id = pin.id
+      ids << own_id
+    end
+  # all user's pins
+    @pins = Pin.find ids
   end
 
   # GET /users/new

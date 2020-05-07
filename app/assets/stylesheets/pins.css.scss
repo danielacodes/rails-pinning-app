@@ -3,7 +3,9 @@ body {
   background-position: top center;
   font-size: 16px;
 }
-
+.text {
+  padding-bottom: 10px;
+}
 a {
   color: #dd5566;
 }
@@ -32,6 +34,21 @@ h1 {
 }
 hr {
   clear: both;
+}
+
+.repin-button {
+  background-color: #dd5566;
+  color: white;
+  font-size: 1em;
+  padding: 10px 50px 10px 50px;
+  font-weight: bold;
+}
+
+.repin-button:hover {
+  background-color: white;
+  color: #dd5566;
+  border: solid 2px #dd5566;
+  text-decoration: none;
 }
 
 /* FORM STYLES */

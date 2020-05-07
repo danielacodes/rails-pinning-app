@@ -21,7 +21,14 @@
 <% end %>
 </div>
 <br/>
+<div>
 <a href="/">
 <i class="fa fa-arrow-circle-left"></i>
   Back to Home
 </a>
+
+  <%= link_to repin_path(@pin), class: "repin-button", method: "post" do %>
+    <i class="fas fa-thumbtack"></i>
+    Repin!
+  <% end %>  
+</div>
