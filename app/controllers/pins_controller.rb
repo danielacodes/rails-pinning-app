@@ -7,10 +7,29 @@ class PinsController < ApplicationController
   
   def show
     @pin = Pin.find(params[:id])
+    pinnings = @pin.pinnings.all
+    ids = []
+
+    # users who repinned
+    pinnings.each do |pinning|
+      id = pinning.user_id
+      ids << id
+    end
+
+    @users = User.find ids
   end
   
   def show_by_name
     @pin = Pin.find_by_slug(params[:slug])
+    pinnings = @pin.pinnings.all
+    ids = []
+
+    # users who repinned
+    pinnings.each do |pinning|
+      id = pinning.user_id
+      ids << id
+    end
+    @users = User.find ids
     render :show
   end
 
