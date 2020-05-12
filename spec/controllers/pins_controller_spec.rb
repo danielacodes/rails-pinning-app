@@ -7,13 +7,6 @@ RSpec.describe PinsController, type: :controller do
     login(@user)
   end
 
-  after(:each) do
-    @pin.destroy
-    if !@user.destroyed?
-      @user.destroy
-    end
-  end
-
   let(:valid_attributes) {
     {
       title: @pin.title,
@@ -44,7 +37,7 @@ RSpec.describe PinsController, type: :controller do
 
       it 'populates @pins with all pins' do
         get :index
-        expect(assigns[:pins]).to eq(Pin.where(:user_id => @user.id))
+        expect(assigns[:pins]).to eq(Pin.all)
       end
 
     end
@@ -121,4 +114,28 @@ RSpec.describe PinsController, type: :controller do
 
     end
 
+    describe "POST repin" do
+      before(:each) do
+        @user = FactoryGirl.create(:user)
+        login(@user)
+        @pin = FactoryGirl.create(:pin)
+      end
+
+      it 'responds with a redirect' do
+        post 'repin', params: { use_route: '/pins/repin/:id', id: @pin.id }
+        expect(response.status).to eq(302)
+      end
+
+      it "Creates a pinning (the pin is now in the user's pins)" do
+       post 'repin', params: { use_route: '/pins/repin/:id', id: @pin.id }
+       pinning = @user.pinnings.last
+       @id = pinning.pin_id
+       expect(assigns(:pin)).to eq(Pin.find(@id))
+      end
+
+      it 'redirects to the user show page' do
+        post 'repin', params: { use_route: '/pins/repin/:id', id: @pin.id }
+        expect(response).to redirect_to(@user)
+      end
+    end
 end
