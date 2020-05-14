@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_182325) do
+ActiveRecord::Schema.define(version: 2020_05_14_050315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 2020_05_05_182325) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "boards", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_boards_on_user_id"
+  end
+
   create_table "categories", id: :serial, force: :cascade do |t|
     t.string "name"
   end
@@ -45,6 +53,8 @@ ActiveRecord::Schema.define(version: 2020_05_05_182325) do
     t.bigint "pin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "board_id"
+    t.index ["board_id"], name: "index_pinnings_on_board_id"
     t.index ["pin_id"], name: "index_pinnings_on_pin_id"
     t.index ["user_id"], name: "index_pinnings_on_user_id"
   end
@@ -70,6 +80,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_182325) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "boards", "users"
   add_foreign_key "pinnings", "pins"
   add_foreign_key "pinnings", "users"
   add_foreign_key "pins", "users"

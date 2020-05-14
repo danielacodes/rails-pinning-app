@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     end
   # all user's pins
     @pins = Pin.find ids
+    # @pins = current_user.pins
   end
 
   # GET /users/new
