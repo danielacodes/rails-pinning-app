@@ -16,6 +16,7 @@ FactoryGirl.define do
     slug
     category
     image { fixture_file_upload(Rails.root.join('spec', 'photos', 'cup-kittes.jpg'), 'image/jpg') } 
+    #image { attach(io: StringIO.new(image.body), filename: "image-#{index + 1}.png") }
   end
 
   factory :user do 
