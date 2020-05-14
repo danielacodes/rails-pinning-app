@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  # Assigns currently logged in user to 'current_user'
   def current_user
     @user ||= User.where("id=?", session[:user_id]).first
   end
@@ -14,4 +15,11 @@ class ApplicationController < ActionController::Base
       redirect_to login_path
     end
   end
+
+  # Checks if a user is logged in or not
+  def logged_in?
+    !current_user.nil? && !current_user.id.nil?
+  end
+  helper_method :logged_in?
+  
 end
