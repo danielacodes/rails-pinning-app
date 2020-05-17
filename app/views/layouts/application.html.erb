@@ -16,13 +16,36 @@
 
 <body>
   <div class="container">
-    <% if session[:user_id] %>
-    <div class="user-greeting pull-right">
-      <h3>
-        Hi, <%= current_user.first_name %>! | <%= link_to 'Logout', logout_path(current_user), method: :delete %>
-      </h3>
+
+    <% if logged_in? %>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle pull-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= current_user.first_name %>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% current_user.boards.each do |board| %>
+        <a class="dropdown-item">
+          <%= link_to "#{board.name}", "/boards/#{board.id}" %>
+        </a>
+        <% end %>
+        <li role="presentation" class="divider"></li>
+        <a class="dropdown-item">
+          <%= link_to "Add a Pin", "/pins/new" %>
+        </a>
+        <a class="dropdown-item">
+          <%= link_to "Add a Board", "/boards/new" %>
+        </a>
+        <li role="presentation" class="divider"></li>
+        <a class="dropdown-item">
+          <%= link_to "Home", "/" %>
+        </a>
+        <a class="dropdown-item">
+          <%= link_to 'Logout', logout_path(current_user), method: :delete %>
+        </a>
+      </div>
     </div>
     <% end  %>
+
     <%= yield %>
   </div>
 </body>
