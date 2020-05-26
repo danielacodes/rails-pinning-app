@@ -1,27 +1,24 @@
-<%= form_with(model: board, local: true) do |form| %>
-  <% if board.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
+<%= form_with(model: board, local: true) do |f| %>
+<% if board.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
 
-      <ul>
-      <% board.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% board.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+<%= f.hidden_field "user_id", value: current_user.id %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
+<div class="field">
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<div class="actions">
+  <%= f.submit %>
+</div>
 <% end %>
